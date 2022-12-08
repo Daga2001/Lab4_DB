@@ -84,6 +84,8 @@ CREATE TABLE course_offering (
     CONSTRAINT fk_course
       FOREIGN KEY(course_id) 
 	  REFERENCES course(course_id)
+      ON UPDATE CASCADE
+      ON DELETE NO ACTION
 );
 -- =============================================================================
 -- ## Tabla enrolls
@@ -98,10 +100,14 @@ CREATE TABLE enrolls (
     PRIMARY KEY (student_id,course_id,sec_id,year,semester),
     CONSTRAINT fk_student
       FOREIGN KEY(student_id) 
-	    REFERENCES student(student_id),
+	    REFERENCES student(student_id)
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION,
     CONSTRAINT fk_course
       FOREIGN KEY(course_id) 
 	    REFERENCES course(course_id)
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 );
 -- =============================================================================
 -- ## Tabla teaches
@@ -115,10 +121,14 @@ CREATE TABLE teaches (
     PRIMARY KEY (instructor_id,course_id,sec_id,year,semester),
     CONSTRAINT fk_instructor
       FOREIGN KEY(instructor_id) 
-	    REFERENCES instructor(instructor_id),
+	    REFERENCES instructor(instructor_id)
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION,
     CONSTRAINT fk_course
       FOREIGN KEY(course_id) 
 	    REFERENCES course(course_id)
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 );
 -- =============================================================================
 -- ## Tabla requires
@@ -129,8 +139,12 @@ CREATE TABLE requires (
     PRIMARY KEY (main_course,prerequisite),
     CONSTRAINT fk_prerequisite
       FOREIGN KEY(prerequisite) 
-	    REFERENCES course(course_id),
+	    REFERENCES course(course_id)
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION,
     CONSTRAINT fk_course
       FOREIGN KEY(main_course) 
 	    REFERENCES course(course_id)
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 );
