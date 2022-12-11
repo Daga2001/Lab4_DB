@@ -3,6 +3,12 @@
 -- a. Cree uno o varios disparadores (triggers) que implemente los siguiente 
 -- requerimientos para la relación enrolls 
 -- =============================================================================
+ALTER DOMAIN grade DROP CONSTRAINT possible_grades;
+ALTER DOMAIN grade ADD CONSTRAINT possible_years
+CHECK
+(
+    VALUE >=1900 AND VALUE <= 2022
+);
 -------------------------------------------------------------------------------
 -- ## i. Al agregar una tupla en enrolls, en caso de que la nota sea negativa, 
 -- cero (0.0) o mayor de 5.00 se debe generar una excepción indicando que el 
@@ -78,11 +84,11 @@ RETURNS VOID
 AS 
 $$
     BEGIN
-        IF EXISTS(SELECT instructor_id FROM teaches where instructor_id = i_id) 
-        AND EXISTS(SELECT course_id FROM teaches where course_id = c_id) THEN
+        IF EXISTS(SELECT instructor_id FROM instructor where instructor_id = i_id) 
+        AND EXISTS(SELECT course_id FROM course_offering where course_id = c_id) THEN
             INSERT INTO teaches (course_id, sec_id, semester, year, instructor_id) 
             SELECT course_id, sec_id, semester, year, i_id instructor_id
-            FROM course_offering WHERE course_id = c_id;
+            FROM course_offering WHERE course_id = c_id LIMIT 1;
         ELSE
             RAISE EXCEPTION 'El registro a insertar tiene un identificador inexistente!';
         END IF;
@@ -91,4 +97,5 @@ $$ LANGUAGE plpgsql;
 -- -----------------------------------------------------------------------------
 -- test queries
 -- -----------------------------------------------------------------------------
-SELECT create_teaches(1,837827);
+DELETE FROM teaches where course_id = 837827;
+SELECT create_teaches(5,837827);

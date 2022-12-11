@@ -15,7 +15,6 @@ SELECT name, program FROM student where student_id = 7656;
 SELECT name
 FROM enrolls 
 NATURAL JOIN student
-NATURAL JOIN course
 WHERE course_id = 837873;
 
 -- ================================================================================
@@ -23,9 +22,9 @@ WHERE course_id = 837873;
 -- obtuvieron las notas más altas por cada semestre entre los años 1900 y 2018
 -- ================================================================================
 CREATE VIEW better_students AS
-    SELECT max(name) student_name, max(title) title, max(grade) grade, semester, year
+    SELECT max(name) student_name, max(grade) grade, semester, year
     FROM enrolls 
     NATURAL JOIN student
-    NATURAL JOIN course
     GROUP BY semester, year
+    HAVING year BETWEEN 1900 AND 2018
     ORDER BY year DESC, semester DESC;
