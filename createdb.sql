@@ -38,11 +38,11 @@ CHECK (
     VALUE >=1.0 AND VALUE <=5.0
 );
 -- ## years
-CREATE DOMAIN year AS INTEGER
+CREATE DOMAIN year AS VARCHAR(4)
 CONSTRAINT possible_years
 CHECK
 (
-    VALUE >=1900 AND VALUE <= 2022
+    CAST(VALUE AS INTEGER) >= 1900 AND CAST(VALUE AS INTEGER) <= 2022
 );
 -- =============================================================================
 -- ## Tabla student

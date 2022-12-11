@@ -4,10 +4,9 @@
 -- requerimientos para la relación enrolls 
 -- =============================================================================
 ALTER DOMAIN grade DROP CONSTRAINT possible_grades;
-ALTER DOMAIN grade ADD CONSTRAINT possible_years
-CHECK
-(
-    VALUE >=1900 AND VALUE <= 2022
+ALTER DOMAIN grade ADD CONSTRAINT possible_grades
+CHECK (
+    VALUE >=1.0 AND VALUE <=5.0
 );
 -------------------------------------------------------------------------------
 -- ## i. Al agregar una tupla en enrolls, en caso de que la nota sea negativa, 
@@ -97,5 +96,5 @@ $$ LANGUAGE plpgsql;
 -- -----------------------------------------------------------------------------
 -- test queries
 -- -----------------------------------------------------------------------------
-DELETE FROM teaches where course_id = 837827;
-SELECT create_teaches(5,837827);
+-- DELETE FROM teaches where course_id = 837827;
+-- SELECT create_teaches(5,837827);

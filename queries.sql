@@ -26,5 +26,5 @@ CREATE VIEW better_students AS
     FROM enrolls 
     NATURAL JOIN student
     GROUP BY semester, year
-    HAVING year BETWEEN 1900 AND 2018
+    HAVING year BETWEEN '1900' AND '2018'
     ORDER BY year DESC, semester DESC;

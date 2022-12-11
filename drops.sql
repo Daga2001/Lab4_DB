@@ -10,7 +10,7 @@ DROP TRIGGER IF EXISTS fr_grade_update ON enrolls;
 -- =============================================================================
 DROP FUNCTION IF EXISTS check_insert_grade();
 DROP FUNCTION IF EXISTS check_update_grade();
-DROP FUNCTION IF EXISTS create_teaches();
+DROP FUNCTION IF EXISTS create_teaches(i_id INT, c_id INT);
 -- =============================================================================
 -- ## views
 -- =============================================================================
