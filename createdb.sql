@@ -1,7 +1,7 @@
 -- =============================================================================
 -- ## Create database
 -- =============================================================================
-CREATE DATABASE mockup001
+CREATE DATABASE lab4db
     WITH
     OWNER = postgres
     ENCODING = 'UTF8'
@@ -11,7 +11,7 @@ CREATE DATABASE mockup001
     CONNECTION LIMIT = -1
     TEMPLATE template0;
 
-    \c mockup001;
+    \c lab4db;
 -- =============================================================================
 -- ## Create sequences
 -- a. El atributo student_id inicia en 7488 con un incremento de 168 cada vez que 
