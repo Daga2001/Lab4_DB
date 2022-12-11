@@ -44,14 +44,14 @@ AS $$
     BEGIN        
         IF NEW.grade < 0 OR NEW.grade > 5.00 THEN
             BEGIN
-                RAISE EXCEPTION 'La nota que se va a insertar es invalida: %', NEW.grade;
+                RAISE EXCEPTION 'La nota que se va a actualizar es invalida: %', NEW.grade;
             END;
         ELSE
             IF NEW.grade = OLD.grade THEN
                 RAISE NOTICE 'la nota no ha sido modificada y su valor persiste: %', OLD.grade;
                 RETURN NEW;
             ELSE
-                RAISE NOTICE 'la nota ha sido modificada de (%) a (%)', OLD.grade, New.grade;
+                RAISE NOTICE 'la nota del estudiante % en el curso % ha sido modificada de (%) a (%)', OLD.student_id, OLD.course_id, OLD.grade, New.grade;
                 RETURN NEW;
             END IF;
         END IF;
@@ -67,8 +67,8 @@ FOR EACH ROW EXECUTE PROCEDURE check_update_grade();
 INSERT INTO enrolls (grade) VALUES (-9);
 
 UPDATE enrolls 
-SET grade = 1
-WHERE grade = 1;
+SET grade = 2
+WHERE grade = 2;
 -- =============================================================================
 -- ## PROCEDURES   
 -- b. Cree un procedimiento create_teaches que automáticamente agregue un 
